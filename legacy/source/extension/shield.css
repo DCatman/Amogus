@@ -1,0 +1,150 @@
+/*
+ * Plik: shield.css
+ * Opis: Style kurtyn blokujących oraz mechanizm Blackout dla kafelków YouTube
+ *       (zachowuje naturalny rozmiar siatki, zapobiegając nieskończonemu ładowaniu).
+ */
+
+/* ==========================================================================
+   1. Mechanizm Blackout na YouTube (Czarne tło zamiast usuwania kafelka)
+   ========================================================================== */
+
+/* Zablokowany kafelek zachowuje wymiary, ale staje się ciemnym prostokątem */
+ytd-rich-item-renderer.amogus-blackout,
+ytd-video-renderer.amogus-blackout,
+ytd-compact-video-renderer.amogus-blackout,
+yt-lockup-view-model.amogus-blackout {
+  background-color: #0c0d12 !important;
+  border: 1px solid #161720 !important;
+  border-radius: 12px !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  pointer-events: none !important;
+}
+
+/* Wygaszenie miniatury, tytułu, awatara i odznaki czasu wewnątrz zablokowanego kafelka */
+.amogus-blackout #content,
+.amogus-blackout .ytLockupViewModelHost,
+.amogus-blackout #dismissible,
+.amogus-blackout yt-lockup-view-model {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Kafelki dozwolone (@lazy mattman, @konopskyy) są w 100% widoczne i aktywne */
+ytd-rich-item-renderer.amogus-allowed,
+ytd-video-renderer.amogus-allowed,
+ytd-compact-video-renderer.amogus-allowed,
+yt-lockup-view-model.amogus-allowed {
+  background-color: transparent !important;
+  border: none !important;
+  pointer-events: auto !important;
+}
+
+.amogus-allowed #content,
+.amogus-allowed .ytLockupViewModelHost,
+.amogus-allowed #dismissible,
+.amogus-allowed yt-lockup-view-model {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+/* Ukrycie samych sekcji YouTube Shorts (rolki) */
+ytd-rich-section-renderer,
+ytd-reel-shelf-renderer {
+  display: none !important;
+}
+
+/* ==========================================================================
+   2. Kurtyna na odtwarzaczu YouTube (/watch) dla nieautoryzowanych filmów
+   ========================================================================== */
+
+#amogus-yt-player-shield {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-color: #08080a !important;
+  z-index: 9999 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #ffffff !important;
+  text-align: center !important;
+  pointer-events: all !important;
+}
+
+#amogus-yt-player-shield .yt-shield-content h2 {
+  color: #f44336 !important;
+  font-size: 26px !important;
+  margin-bottom: 10px !important;
+  font-weight: 700 !important;
+}
+
+#amogus-yt-player-shield .yt-shield-content p {
+  color: #cccccc !important;
+  font-size: 14px !important;
+  margin-bottom: 12px !important;
+}
+
+#amogus-yt-player-shield .channel-tag {
+  color: #ff9800 !important;
+  font-family: monospace !important;
+  font-size: 15px !important;
+  font-weight: bold !important;
+}
+
+/* ==========================================================================
+   3. Pełnoekranowa kurtyna dla obcych witryn www
+   ========================================================================== */
+
+#amogus-web-shield {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: #0b0c10 !important;
+  z-index: 2147483647 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #ffffff !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  pointer-events: all !important;
+}
+
+#amogus-web-shield .shield-box {
+  background: #14161d;
+  border: 2px solid #d32f2f;
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+  max-width: 520px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+#amogus-web-shield h1 {
+  color: #ff5252;
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+#amogus-web-shield p {
+  color: #c5c6c7;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+#amogus-web-shield .url-display {
+  background: #000000;
+  border: 1px solid #333333;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 13px;
+  color: #66fcf1;
+  word-break: break-all;
+}

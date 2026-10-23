@@ -1,0 +1,31 @@
+cmake_minimum_required(VERSION 3.24)
+project(AmogusCore VERSION 0.30.0 LANGUAGES C CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+include(FetchContent)
+
+# Dependencies are pinned. CMake downloads them at configure time.
+set(SQLITE3_URL https://www.sqlite.org/2025/sqlite-amalgamation-3500400.zip CACHE STRING "Pinned SQLite amalgamation")
+FetchContent_Declare(sqlite3 URL ${SQLITE3_URL} DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
+FetchContent_GetProperties(sqlite3)
+if(NOT sqlite3_POPULATED)
+  FetchContent_Populate(sqlite3)
+endif()
+add_library(sqlite3 STATIC ${sqlite3_SOURCE_DIR}/sqlite3.c)
+target_include_directories(sqlite3 PUBLIC ${sqlite3_SOURCE_DIR})
+if(WIN32)
+  target_link_libraries(sqlite3 PUBLIC shell32)
+endif()
+
+FetchContent_Declare(httplib GIT_REPOSITORY https://github.com/yhirose/cpp-httplib.git GIT_TAG v0.18.3 GIT_SHALLOW TRUE)
+FetchContent_MakeAvailable(httplib)
+FetchContent_Declare(nlohmann_json GIT_REPOSITORY https://github.com/nlohmann/json.git GIT_TAG v3.12.0 GIT_SHALLOW TRUE)
+FetchContent_MakeAvailable(nlohmann_json)
+
+add_executable(amogus_core backend/src/main.cpp)
+target_link_libraries(amogus_core PRIVATE httplib::httplib nlohmann_json::nlohmann_json sqlite3)
+if(WIN32)
+  target_link_libraries(amogus_core PRIVATE ws2_32 ole32 shell32)
+endif()

@@ -1,0 +1,78 @@
+/* Blackout keeps YouTube's original card geometry to avoid layout/recommendation loops. */
+ytd-rich-item-renderer.amogus-yt-blackout,
+ytd-video-renderer.amogus-yt-blackout,
+ytd-compact-video-renderer.amogus-yt-blackout,
+ytd-grid-video-renderer.amogus-yt-blackout,
+yt-lockup-view-model.amogus-yt-blackout,
+ytd-reel-item-renderer.amogus-yt-blackout,
+ytd-compact-radio-renderer.amogus-yt-blackout {
+  position: relative !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  border-radius: 12px !important;
+  background: #080b12 !important;
+  border: 1px solid #182235 !important;
+  pointer-events: none !important;
+  isolation: isolate !important;
+}
+.amogus-yt-blackout > #content,
+.amogus-yt-blackout #dismissible,
+.amogus-yt-blackout .ytLockupViewModelHost,
+.amogus-yt-blackout yt-lockup-view-model,
+.amogus-yt-blackout ytd-thumbnail,
+.amogus-yt-blackout #details,
+.amogus-yt-blackout #meta,
+.amogus-yt-blackout #avatar-link,
+.amogus-yt-blackout #channel-name,
+.amogus-yt-blackout h3 {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+.amogus-yt-blackout-overlay {
+  position: absolute !important;
+  z-index: 2147483000 !important;
+  inset: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 12px !important;
+  box-sizing: border-box !important;
+  background: linear-gradient(145deg, #080b12, #101827) !important;
+  color: #60718c !important;
+  font: 700 11px/1.4 system-ui, sans-serif !important;
+  letter-spacing: .14em !important;
+  text-align: center !important;
+  pointer-events: none !important;
+}
+.amogus-yt-blackout-overlay::after {
+  content: attr(data-handle) !important;
+  position: absolute !important;
+  bottom: 10px !important;
+  left: 8px !important;
+  right: 8px !important;
+  color: #394860 !important;
+  font: 500 10px/1.3 system-ui, sans-serif !important;
+  letter-spacing: normal !important;
+}
+.amogus-yt-allowed { pointer-events: auto !important; }
+.amogus-yt-hidden-shorts { display: none !important; }
+#amogus-yt-player-shield {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2147483646 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  box-sizing: border-box !important;
+  padding: 24px !important;
+  background: #070a10 !important;
+  color: #e7edf7 !important;
+  text-align: center !important;
+  font: 14px/1.5 system-ui, sans-serif !important;
+  pointer-events: all !important;
+}
+#amogus-yt-player-shield strong { color: #ff5d69 !important; font-size: clamp(18px, 2.4vw, 28px) !important; }
+#amogus-yt-player-shield p { max-width: 420px !important; color: #aebbd0 !important; }
+#amogus-yt-player-shield .amogus-yt-shield-channel { color: #f5b84b !important; font-family: ui-monospace, monospace !important; }
